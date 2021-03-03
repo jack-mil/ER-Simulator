@@ -31,6 +31,7 @@ If all rooms are full, even rating 4 must wait
 
 ## Questions ##
 Can we run faster than 1 second per minute?
+
 Chance time is extended by how much?
 
 
