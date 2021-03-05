@@ -4,6 +4,7 @@ Write a simulation of hospital rooms in use over a 10h time period
 
 Program will run in (sped up) real time (1s real time = 1min simulated time)
 
+Sampled at what rate?
 Arrival must be randomly set based off of the following:
 - a. 10% of the time no one comes in
 - b. 50% of the time just one person comes in
@@ -25,23 +26,23 @@ The room is in use based on urgency distribution
 2. 45 min
 3. 60 min
 4. 20 min
-- 20% chance time is extended (by how much?)
+- 20% chance time is extended by 5 to 1/2 of base for every patient (failed constitution saving throw)
 
 If all rooms are full, even rating 4 must wait
+
+End: How many people (and priority) left in waiting room? How many came in? Average waiting time?
+Max and Min rooms empty during simulation?
 
 ## Questions ##
 Can we run faster than 1 second per minute?
 
-Chance time is extended by how much?
-
-
-
+Output all at end or throughout? (Maybe put details to a log file, general updates and final analysis to std.in?)
 
 # Classes: #
 
 ## - `Patient`
-- `String name`
+- `String name` (not needed)
 - `int priority`
-- `int waitTime`
+- `int waitTime` (how long they have been waiting)
 - `public Patient()`
   - Create a new patient object with random rating based on given distribution
