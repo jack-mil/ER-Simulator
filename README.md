@@ -2,9 +2,14 @@
 Write a simulation of hospital rooms in use over a 10h time period
 #### Keep a timelog of time spent working ####
 
-Program will run in (sped up) real time (1s real time = 1min simulated time)
+Program will run in (sped up) real time (1s real time = 1min simulated time).
+We should request to run the simulation as fast as possible (600 simulation steps/iterations).
 
-Sampled at what rate?
+User picks an estimate of number of rooms needed. Analysis states whether that amount was sufficient.
+Number of rooms left empty, patient levels left waiting (average time perhaps?).
+
+Sampled rate up to us. Perhaps use 10% of 600 min is 60, %50 is 300, etc?
+
 Arrival must be randomly set based off of the following:
 - a. 10% of the time no one comes in
 - b. 50% of the time just one person comes in
