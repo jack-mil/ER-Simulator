@@ -5,18 +5,18 @@ import java.util.Queue;
  * Trying to make sure things are popped in the right order.
  */
 public class PriorityQueueExample {
-    public static void main(String[] args) {
-        Queue<Patient> exampleQueue = new PriorityQueue<>();
+	public static void main(String[] args) {
+		Queue<Patient> exampleQueue = new PriorityQueue<>();
 
-        for (int i = 0; i < 100; i++) {
-            exampleQueue.add(new Patient((i+1)));
-        }
-        System.out.println("Queue Order:");
-        int count = 1;
-        while(!exampleQueue.isEmpty()) {
-            Patient p = exampleQueue.poll();
-            int t = p.getArrivalTime();
-            System.out.printf("%s diff: %d\n", p, t-count++);
-        }
-    }
+		for (int i = 0; i < 100; i++) {
+			exampleQueue.add(new Patient((i + 1)));
+		}
+		System.out.println("Queue Order:");
+		int count = 1;
+		while (!exampleQueue.isEmpty()) {
+			Patient p = exampleQueue.poll();
+			int t = p.getArrivalTime();
+			System.out.printf("%s diff: %d\n", p, t - count++);
+		}
+	}
 }
