@@ -1,7 +1,10 @@
 # Group project #
 Write a simulation of hospital rooms in use over a 10h time period
-#### Keep a timelog of time spent working ####
-
+#### [Work timelog](Docs/TimeLog.md) ####
+------------------------------------------
+#### [Code Style Guide](Docs/Style.md) ####
+------------------------------------------
+#### Specifications ####
 Program will run in (sped up) real time (1s real time = 1min simulated time).
 We should request to run the simulation as fast as possible (600 simulation steps/iterations).
 
