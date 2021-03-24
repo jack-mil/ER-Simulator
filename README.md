@@ -48,9 +48,5 @@ Output all at end or throughout? (Maybe put details to a log file, general updat
 
 # Classes: #
 
-## - `Patient`
-- `String name` (not needed)
-- `int priority`
-- `int waitTime` (how long they have been waiting)
-- `public Patient()`
-  - Create a new patient object with random rating based on given distribution
+### `Patient` ###
+- see [Patient Docs](Docs/AlgorithmDesign-Jackson.md)

@@ -48,17 +48,17 @@ public class Patient implements Comparable<Patient> {
 		id = count++;
 	}
 
-	int getLevel() {
+	public int getLevel() {
 		if (level == 4)
 			return 100;
 		return level;
 	}
 
-	int getArrivalTime() {
+	public int getArrivalTime() {
 		return arrivalTime;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
