@@ -27,9 +27,9 @@ public class Patient implements Comparable<Patient> {
 		double d = Math.random();
 		if (d <= 0.1) {
 			level = 4;
-		} else if (d <= 0.15) {
+		} else if (d <= 0.25) {
 			level = 1;
-		} else if (d <= 0.3) {
+		} else if (d <= 0.55) {
 			level = 2;
 		} else {
 			level = 3;
