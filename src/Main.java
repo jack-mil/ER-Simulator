@@ -34,7 +34,7 @@ public class Main {
 				}
 			}
 
-			// @TODO Create and Implement ER Rooms class for second 1/2 of main
+			// @TODO Create and Implement ER Rooms class for second 1/2 of main loop
 		}
 
 		// @TODO Create the Analytics and outputs (Send to a DOC) - Korbin Davis and Nessie Richmond
