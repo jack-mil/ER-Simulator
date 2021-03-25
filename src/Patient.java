@@ -49,8 +49,6 @@ public class Patient implements Comparable<Patient> {
 	}
 
 	public int getLevel() {
-		if (level == 4)
-			return 100;
 		return level;
 	}
 
