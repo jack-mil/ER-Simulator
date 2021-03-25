@@ -99,7 +99,7 @@ public class RoomList {
 	/** Internal node like class
 	 * Rooms assign themselves the correct occupancy time based on patient level
 	*/
-	static class Room {
+	private static class Room {
 		// Is the patient information even needed anymore?
 		// Patient patient;
 

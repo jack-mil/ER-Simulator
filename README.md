@@ -1,4 +1,4 @@
-++++++++++++++++++++++++++++++++++++++++++++++++++++++# Group project #
+# Group project #
 Write a simulation of hospital rooms in use over a 10h time period
 #### [Work timelog](Docs/TimeLog.md) ####
 ------------------------------------------
@@ -42,7 +42,7 @@ End: How many people (and priority) left in waiting room? How many came in? Aver
 Max and Min rooms empty during simulation?
 
 ## Questions ##
-Can we run faster than 1 second per minute?
+Can we run faster than 1 second per minute? : YES
 
 Output all at end or throughout? (Maybe put details to a log file, general updates and final analysis to std.in?)
 
@@ -50,3 +50,5 @@ Output all at end or throughout? (Maybe put details to a log file, general updat
 
 ### `Patient` ###
 - see [Patient Docs](Docs/AlgorithmDesign-Jackson.md)
+### `RoomList` ###
+- see [RoomList Docs (TODO)]()
