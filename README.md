@@ -1,4 +1,4 @@
-# Group project #
+++++++++++++++++++++++++++++++++++++++++++++++++++++++# Group project #
 Write a simulation of hospital rooms in use over a 10h time period
 #### [Work timelog](Docs/TimeLog.md) ####
 ------------------------------------------
