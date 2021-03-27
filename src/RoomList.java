@@ -50,8 +50,9 @@ public class RoomList {
 
 	}
 
-	/** Everytime this method is called, empty rooms will become available
-	 * if enough time has passed
+	/**
+	 * Everytime this method is called, empty rooms will become 
+	 * available if enough time has passed
 	 * @return number of room openings
 	 */
 	public int tick(int currentTime) {
@@ -70,9 +71,9 @@ public class RoomList {
 				count++;
 			}
 		}
-
 		return count;
 	}
+
 	/** @return number of rooms currently occupied */
 	public int getOccupiedRooms() {
 		return roomsLL.size();
@@ -96,17 +97,19 @@ public class RoomList {
 		return maxRooms - getMaxEverOccupancy();
 	}
 
-	/** Internal node like class
+	/** Internal data class
 	 * Rooms assign themselves the correct occupancy time based on patient level
 	*/
 	private static class Room {
 		// Is the patient information even needed anymore?
 		// Patient patient;
 
+		/** The time this room became occupied */
 		int timeIn;
+		/** Time this room will remain occupied */
 		int useTime;
 
-		/** Create a new room object that contains a patient and a time admited */
+		/** Create a new room object with data based on patient level */
 		Room(Patient patient, int timeIn) {
 			//@TODO implement random chance to increase base in-use time
 			switch (patient.getLevel()) {
@@ -115,14 +118,21 @@ public class RoomList {
 				break;
 			case 2:
 				useTime = 45;
+				break;
 			case 3:
 				useTime = 60;
+				break;
 			default: // Default case is urgency 4
 				useTime = 20;
 				break;
 			}
 			// this.patient = patient;
 			this.timeIn = timeIn;
+		}
+
+		/** @return String representation of the room data */
+		public String toString() {
+			return String.format("{timeIn: %d, duration: %d}", timeIn, useTime);
 		}
 	}
 

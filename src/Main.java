@@ -6,10 +6,13 @@ import java.lang.Math;
 // Placeholder
 public class Main {
 
+	/** Maximum allowable rooms */
+	public static int maxRooms;
+
+	/** Total patient counts */
+	public static int patientCount, admittedCount;
+
 	public static void main(String[] args) {
-		
-		/** Maximum allowable rooms */
-		int maxRooms;
 
 		/** Random Variable Placeholders */
 		double arrival1, arrival2;
@@ -37,15 +40,18 @@ public class Main {
 			}
 			else if (arrival1 <= 59) { // 1 new patient (50%)
 				waitRoom.add(new Patient(i));
+				patientCount++;
 			}
 			else if (arrival1 <= 98) { // 2-4 new patients (39%)
 				for (int j = 0; j < ((arrival2 % 3) + 2); j++) {
 					waitRoom.add(new Patient(i));
+					patientCount++;
 				}
 			}
 			else { // 10-15 new patients (1%)
 				for (int j = 0; j < ((arrival2 % 6) + 10); j++) {
 					waitRoom.add(new Patient(i));
+					patientCount++;
 				}
 			}
 
@@ -54,6 +60,7 @@ public class Main {
 				// Remove the next Patient from the waiting room and
 				// Put them in an empty ER Room
 				eRooms.admit(waitRoom.poll(), i);
+				admittedCount++;
 			}
 
 			eRooms.tick(i);

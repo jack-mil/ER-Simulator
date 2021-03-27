@@ -14,13 +14,11 @@
  */
 public class Patient implements Comparable<Patient> {
 
-	// Static count of how many Patients exists. Used for unique id.
+	/** Static count of how many Patient Instances exist. Used for unique ID */
 	private static int count = 0;
 
 	// Instance properties
-	private int level;
-	private int arrivalTime;
-	private int id;
+	private int level, arrivalTime, id;
 
 	/** Create a new patient with random urgency level assignment */
 	public Patient(int currentTime) {
@@ -80,29 +78,34 @@ public class Patient implements Comparable<Patient> {
 	private double calcWeight() {
 		final double P1 = 0.6;
 		final double P2 = 0.4;
-		return (P1 * getLevel() / 4) + (P2 * 1 / arrivalTime);
+		// Ensure level 4 patients have automatic priority
+		if (level == 4) {
+			return Integer.MAX_VALUE;
+		} else {
+			return (P1 * level / 4) + (P2 * 1 / arrivalTime);
+		}
+
 	}
 
-	/**
-	 * The equals method wich may be needed
-	 * //TODO: test this method if needed
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if ((o == null) || getClass() != o.getClass())
-			return false;
-		Patient p = (Patient) o;
-		return (p.id == id && p.level == level && p.arrivalTime == arrivalTime);
-	}
+	// /**
+	//  * The equals method wich may be needed
+	//  * //TODO: test this method if needed
+	//  */
+	// @Override
+	// public boolean equals(Object o) {
+	// 	if (this == o)
+	// 		return true;
+	// 	if ((o == null) || getClass() != o.getClass())
+	// 		return false;
+	// 	Patient p = (Patient) o;
+	// 	return (p.id == id && p.level == level && p.arrivalTime == arrivalTime);
+	// }
 
 	/**
-	 * Return a string representation of a Patient. Useful in debugging
-	 * System.out.println(new Patient(30));
+	 * @return string representation of a Patient. Useful in debugging
 	 */
 	@Override
 	public String toString() {
-		return String.format("Patient{id=%d, level=%d, time=%d, weight=%f}", id, level, arrivalTime, calcWeight());
+		return String.format("{id=%d, level=%d, time=%d, weight=%f}", id, level, arrivalTime, calcWeight());
 	}
 }
