@@ -1,16 +1,31 @@
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Scanner;
 import java.lang.Math;
 
 // Placeholder
 public class Main {
 
 	public static void main(String[] args) {
+		
+		/** Maximum allowable rooms */
+		int maxRooms;
+
+		/** Random Variable Placeholders */
 		double arrival1, arrival2;
-		Queue<Patient> waitRoom = new PriorityQueue<>();
+
+		/** Instantiate a new Scanner Object for User Input */
+		Scanner sc = new Scanner(System.in);
 
 		// @TODO Get User Inputs
 
+		maxRooms = sc.nextInt();
+
+		/** Construct an empty Waiting Room Priority Queue */
+		Queue<Patient> waitRoom = new PriorityQueue<>();
+
+		/** Construct an empty ER Rooms RoomList (modified Linked List) */
+		RoomList eRooms = new RoomList(maxRooms);
 
 		// @TODO Create Main Simulation loop - Korbin Davis
 		for (int i = 1; i < 601; i++) { // Counting from 1 to 600 so that we just have seconds
@@ -35,9 +50,18 @@ public class Main {
 			}
 
 			// @TODO Create and Implement ER Rooms class for second 1/2 of main loop
+			while (eRooms.hasEmptyRooms() == true && waitRoom.isEmpty() == false) {
+				// Remove the next Patient from the waiting room and
+				// Put them in an empty ER Room
+				eRooms.admit(waitRoom.poll(), i);
+			}
+
+			eRooms.tick(i);
 		}
 
 		// @TODO Create the Analytics and outputs (Send to a DOC) - Korbin Davis and Nessie Richmond
 
+		// @TODO Tie up loose ends
+		sc.close();
 	}
 }
