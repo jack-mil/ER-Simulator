@@ -111,19 +111,23 @@ public class RoomList {
 
 		/** Create a new room object with data based on patient level */
 		Room(Patient patient, int timeIn) {
-			//@TODO implement random chance to increase base in-use time
+			// Randomly assigns patient treatment time
+			double timeVar1 = Math.random();
+			int timeVar2 = (int) (Math.floor(Math.random() * 100.0) % 100);
+
 			switch (patient.getLevel()) {
 			case 1:
-				useTime = 30;
+				useTime = timeVar1 > 0.2 ? 30 : 35 + timeVar2 % 11; 
 				break;
 			case 2:
-				useTime = 45;
+			// Since Time is an integer, I rounded 45/2 up to 23.
+			useTime = timeVar1 > 0.2 ? 45 : 50 + timeVar2 % 19;
 				break;
 			case 3:
-				useTime = 60;
+			useTime = timeVar1 > 0.2 ? 60 : 65 + timeVar2 % 26;
 				break;
 			default: // Default case is urgency 4
-				useTime = 20;
+			useTime = timeVar1 > 0.2 ? 20 : 25 + timeVar2 % 6;
 				break;
 			}
 			// this.patient = patient;
