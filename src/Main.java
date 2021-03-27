@@ -10,12 +10,16 @@ public class Main {
 	public static int maxRooms;
 
 	/** Total patient counts */
-	public static int patientCount, admittedCount;
+	public static int patientCount;
+	public static int admittedCount = 0;
 
 	public static void main(String[] args) {
 
 		/** Random Variable Placeholders */
 		double arrival1, arrival2;
+
+		/** Cumulative Moving Average of Waiting Time */
+		int avgWait = 0;
 
 		/** Instantiate a new Scanner Object for User Input */
 		Scanner sc = new Scanner(System.in);
@@ -59,7 +63,10 @@ public class Main {
 			while (eRooms.hasEmptyRooms() == true && waitRoom.isEmpty() == false) {
 				// Remove the next Patient from the waiting room and
 				// Put them in an empty ER Room
-				eRooms.admit(waitRoom.poll(), i);
+				// Also records their waiting time for the CA
+				var Patient = waitRoom.poll();
+				avgWait = ((i - Patient.getArrivalTime()) + admittedCount * avgWait) / (admittedCount + 1);
+				eRooms.admit(Patient, i);
 				admittedCount++;
 			}
 
