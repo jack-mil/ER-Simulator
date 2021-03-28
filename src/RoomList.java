@@ -61,10 +61,10 @@ public class RoomList {
 		Iterator<Room> itr = roomsLL.iterator();
 
 		int count = 0;
-		while(itr.hasNext()){
+		while (itr.hasNext()) {
 			Room r = itr.next();
 			// Check if the room has been occupied long enough
-			if(currentTime - r.timeIn >= r.useTime) {
+			if (currentTime - r.timeIn >= r.occupiedTime) {
 				// Remove the last room returned by next() from the linked list.
 				// This should occur in O(1) time.
 				itr.remove();
@@ -97,17 +97,15 @@ public class RoomList {
 		return maxRooms - getMaxEverOccupancy();
 	}
 
-	/** Internal data class
+	/**
+	 * Internal data class
 	 * Rooms assign themselves the correct occupancy time based on patient level
 	*/
 	private static class Room {
-		// Is the patient information even needed anymore?
-		// Patient patient;
-
 		/** The time this room became occupied */
 		int timeIn;
 		/** Time this room will remain occupied */
-		int useTime;
+		int occupiedTime;
 
 		/** Create a new room object with data based on patient level */
 		Room(Patient patient, int timeIn) {
@@ -117,26 +115,25 @@ public class RoomList {
 
 			switch (patient.getLevel()) {
 			case 1:
-				useTime = timeVar1 > 0.2 ? 30 : 35 + timeVar2 % 11; 
+				occupiedTime = timeVar1 > 0.2 ? 30 : 35 + timeVar2 % 11;
 				break;
 			case 2:
-			// Since Time is an integer, I rounded 45/2 up to 23.
-			useTime = timeVar1 > 0.2 ? 45 : 50 + timeVar2 % 19;
+				// Since Time is an integer, I rounded 45/2 up to 23.
+				occupiedTime = timeVar1 > 0.2 ? 45 : 50 + timeVar2 % 19;
 				break;
 			case 3:
-			useTime = timeVar1 > 0.2 ? 60 : 65 + timeVar2 % 26;
+				occupiedTime = timeVar1 > 0.2 ? 60 : 65 + timeVar2 % 26;
 				break;
 			default: // Default case is urgency 4
-			useTime = timeVar1 > 0.2 ? 20 : 25 + timeVar2 % 6;
+				occupiedTime = timeVar1 > 0.2 ? 20 : 25 + timeVar2 % 6;
 				break;
 			}
-			// this.patient = patient;
 			this.timeIn = timeIn;
 		}
 
 		/** @return String representation of the room data */
 		public String toString() {
-			return String.format("{timeIn: %d, duration: %d}", timeIn, useTime);
+			return String.format("{timeIn: %d, duration: %d}", timeIn, occupiedTime);
 		}
 	}
 

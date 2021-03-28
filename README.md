@@ -49,6 +49,6 @@ Output all at end or throughout? (Maybe put details to a log file, general updat
 # Classes: #
 
 ### `Patient` ###
-- see [Patient Docs](Docs/AlgorithmDesign-Jackson.md)
+- see [Patient Docs](Docs/Patient.md)
 ### `RoomList` ###
-- see [RoomList Docs (TODO)]()
+- see [RoomList Docs (TODO)](Docs/RoomsList.md)
