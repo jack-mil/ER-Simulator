@@ -11,6 +11,7 @@
  * Patients in a Java PriorityQueue will order themselves by urgency level and
  * arrival time. Level 4 Patiens will always get precedence before others,
  * regardless of arrival time.
+ * @author Jackson Miller
  */
 public class Patient implements Comparable<Patient> {
 
@@ -72,8 +73,8 @@ public class Patient implements Comparable<Patient> {
 	 * Calculate a weighted sum of urgency level and arrival time.
 	 * Temporary implementation, will probably be tweaked after testing.
 	 * Currently the equation values level over arrival time.
-	 * 
-	 * @return
+	 *
+	 * @return this Patients priority weight
 	 */
 	private double calcWeight() {
 		final double P1 = 0.6;
@@ -84,26 +85,9 @@ public class Patient implements Comparable<Patient> {
 		} else {
 			return (P1 * level / 4) + (P2 * 1 / arrivalTime);
 		}
-
 	}
 
-	// /**
-	//  * The equals method wich may be needed
-	//  * //TODO: test this method if needed
-	//  */
-	// @Override
-	// public boolean equals(Object o) {
-	// 	if (this == o)
-	// 		return true;
-	// 	if ((o == null) || getClass() != o.getClass())
-	// 		return false;
-	// 	Patient p = (Patient) o;
-	// 	return (p.id == id && p.level == level && p.arrivalTime == arrivalTime);
-	// }
-
-	/**
-	 * @return string representation of a Patient. Useful in debugging
-	 */
+	/** @return string representation of a Patient. Useful in debugging */
 	@Override
 	public String toString() {
 		return String.format("{id=%d, level=%d, time=%d, weight=%f}", id, level, arrivalTime, calcWeight());

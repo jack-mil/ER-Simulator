@@ -1,17 +1,20 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/** List of rooms in the ER.
+/**
+ * List of rooms in the ER.
  * Patients admitted to this list will be assigned any available "Room".
- * The amount of time a room remains occupied is determined apon creation based on 
- * Patient urgency level.
+ * The amount of time a room remains occupied is determined on 
+ * creation based on Patient urgency level.
  * <ul>
  * <li> 1: 30 min
  * <li> 2: 45 min
  * <li> 3: 60 min
  * <li> 4: 20 min
  * </ul>
- * There is an additional 20% chance the time is extended by to 1/2 of base time.
+ * There is an additional 20% chance the time is extended by up to 1/2 of base time.
+ *
+ * @author Jackson Miller
 */
 public class RoomList {
 
@@ -34,8 +37,6 @@ public class RoomList {
 	/**
 	 * Add a new patient to any open "room".
 	 * Will fail to add a patient if all rooms are full.
-	 * Inserts a new Room node to the end of the chain.
-	 * Implementation straight from java.util.LinkedList.
 	 * @param p Patient to be added
 	 * @return true if the addition was succesful, false otherwise
 	 */
@@ -47,17 +48,16 @@ public class RoomList {
 			roomsLL.add(new Room(p, currentTime));
 			return true;
 		}
-
 	}
 
 	/**
-	 * Everytime this method is called, empty rooms will become 
+	 * Everytime this method is called, empty rooms will become
 	 * available if enough time has passed
 	 * @return number of room openings
 	 */
 	public int tick(int currentTime) {
 		// Use an iterator to loop through the linked list and remove Rooms that are old
-		// This can all be accomplished in linear time O(n) because of the LinkedList implementation
+		// This can all be accomplished in linear time because of the LinkedList implementation
 		Iterator<Room> itr = roomsLL.iterator();
 
 		int count = 0;
@@ -86,7 +86,7 @@ public class RoomList {
 
 	/** @return greatest number of rooms ever occupied at one time */
 	public int getMaxEverOccupancy() {
-		if (roomsLL.size() > maxEverOccupied)
+		if (roomsLL.size() >= maxEverOccupied)
 			maxEverOccupied = roomsLL.size();
 
 		return maxEverOccupied;
@@ -104,10 +104,12 @@ public class RoomList {
 	private static class Room {
 		/** The time this room became occupied */
 		int timeIn;
-		/** Time this room will remain occupied */
+		/** Total time this room will remain occupied */
 		int occupiedTime;
 
-		/** Create a new room object with data based on patient level */
+		/** Create a new room object with data based on patient level
+		 * @author Korbin Davis
+		*/
 		Room(Patient patient, int timeIn) {
 			// Randomly assigns patient treatment time
 			double timeVar1 = Math.random();
