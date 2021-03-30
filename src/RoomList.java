@@ -71,7 +71,14 @@ public class RoomList {
 				count++;
 			}
 		}
+
+		updateMaxSize();
 		return count;
+	}
+
+	private void updateMaxSize() {
+		if (roomsLL.size() >= maxEverOccupied)
+			maxEverOccupied = roomsLL.size();
 	}
 
 	/** @return number of rooms currently occupied */
@@ -86,9 +93,7 @@ public class RoomList {
 
 	/** @return greatest number of rooms ever occupied at one time */
 	public int getMaxEverOccupancy() {
-		if (roomsLL.size() >= maxEverOccupied)
-			maxEverOccupied = roomsLL.size();
-
+		updateMaxSize();
 		return maxEverOccupied;
 	}
 
