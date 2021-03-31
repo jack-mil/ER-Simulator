@@ -16,10 +16,10 @@ public class Main {
 
 	/** Total patient counts */
 	static int arrivalCount;
-	static int admittedCount;
+	static int[] admittedCount = new int[5];
 
 	/** Cumulative Moving Average of Waiting Time */
-	static double avgWait;
+	static double[] avgWait = new double[5];
 
 	/** The queue of arriving patients */
 	static Queue<Patient> waitRoom;
@@ -62,9 +62,12 @@ public class Main {
 				// put them in an empty ER Room
 				// Also records their waiting time for the Cumulative Average
 				Patient p = waitRoom.poll();
-				avgWait = ((i - p.getArrivalTime()) + admittedCount * avgWait) / (admittedCount + 1);
+				int level = p.getLevel();
+				avgWait[0] = ((i - p.getArrivalTime()) + admittedCount[0] * avgWait[0]) / (admittedCount[0] + 1);
+				avgWait[level] = ((i - p.getArrivalTime()) + admittedCount[level] * avgWait[level]) / (admittedCount[level] + 1);
 				eRooms.admit(p, i);
-				admittedCount++;
+				admittedCount[0]++;
+				admittedCount[level]++;
 			}
 
 			// Update the rooms list with the current time to open up any available rooms
@@ -75,9 +78,13 @@ public class Main {
 		int max = eRooms.getMaxEverOccupancy();
 		int min = eRooms.getMinEverVacancy();
 		System.out.print("Total patients arrived:	%d\n".formatted(arrivalCount)
-				+ "Total patients treated:	%d\n".formatted(admittedCount)
+				+ "Total patients treated:	%d\n".formatted(admittedCount[0])
 				+ "Patients left in wating room:	%d\n".formatted(waitRoom.size()) + formatRemainingPatients().indent(2)
-				+ "Average wait time:	%.1f min\n".formatted(avgWait) + "\n"
+				+ "Average wait time:	%.1f min\n".formatted(avgWait[0]) + "\n"
+				+ "Average wait time for level 1:	%.1f min\n".formatted(avgWait[1]) + "\n"
+				+ "Average wait time for level 2:	%.1f min\n".formatted(avgWait[2]) + "\n"
+				+ "Average wait time for level 3:	%.1f min\n".formatted(avgWait[3]) + "\n"
+				+ "Average wait time for level 4:	%.1f min\n".formatted(avgWait[4]) + "\n"
 				+ "Max room occupancy:	%d/%d\n".formatted(max, maxRooms) + "Unused Rooms:	%d/%d\n".formatted(min, maxRooms));
 
 		// @TODO Create the Analytics and outputs (Send to a DOC) - Korbin Davis and Nessie Richmond
