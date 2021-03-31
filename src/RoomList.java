@@ -4,7 +4,7 @@ import java.util.LinkedList;
 /**
  * List of rooms in the ER.
  * Patients admitted to this list will be assigned any available "Room".
- * The amount of time a room remains occupied is determined on 
+ * The amount of time a room remains occupied is determined on
  * creation based on Patient urgency level.
  * <ul>
  * <li> 1: 30 min
@@ -39,7 +39,7 @@ public class RoomList {
 	 * @return true if the addition was succesful, false otherwise
 	 */
 	public boolean admit(Patient p, int currentTime) {
-		// Return false and ignore patient if no more rooms are available
+		// Return false if no more rooms are available
 		if (roomsLL.size() >= maxRooms) {
 			return false;
 		} else {
@@ -59,7 +59,7 @@ public class RoomList {
  */
 public int tick(int currentTime) {
 	// Use an iterator to loop through the linked list and remove Rooms that are old
-	// This can all be accomplished in linear time because of the LinkedList implementation
+	// Removal is O(1) because of LinkedList implementation
 	Iterator<Room> itr = roomsLL.iterator();
 
 	int count = 0;
@@ -68,7 +68,6 @@ public int tick(int currentTime) {
 		// Check if the room has been occupied long enough
 		if (currentTime - r.timeIn >= r.occupiedTime) {
 			// Remove the last room returned by next() from the linked list.
-			// This should occur in O(1) time.
 			itr.remove();
 			count++;
 		}
@@ -97,8 +96,8 @@ public int tick(int currentTime) {
 	}
 
 	/**
-	 * Internal data class
-	 * Rooms assign themselves the correct occupancy time based on patient level
+	 * Internal data class.
+	 * Rooms assign themselves the correct occupancy time based on patient level.
 	*/
 	private static class Room {
 		/** The time this room became occupied */
@@ -106,9 +105,7 @@ public int tick(int currentTime) {
 		/** Total time this room will remain occupied */
 		int occupiedTime;
 
-		/** Create a new room object with data based on patient level
-		 * @author Korbin Davis
-		*/
+		/** Create a new room object with data based on patient level */
 		Room(Patient patient, int timeIn) {
 			// Randomly assigns patient treatment time
 			double timeVar1 = Math.random();

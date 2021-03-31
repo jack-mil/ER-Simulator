@@ -1,5 +1,4 @@
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Scanner;
 import java.lang.Math;
 import java.io.FileOutputStream;
@@ -8,7 +7,7 @@ import java.io.IOException;
  * Main simulation class
  * Run a 10h simulation of emergency room patient logistics.
  * See README and docs for detailed explanations
- *
+ *	Requires Java >= 15 for to compile
  * @author Korbin Davis, Jackson Miller, Nessie Richmond
  */
 public class Main {
@@ -24,7 +23,7 @@ public class Main {
 	static double[] avgWait = new double[5];
 
 	/** The queue of arriving patients */
-	static Queue<Patient> waitRoom;
+	static PriorityQueue<Patient> waitRoom;
 
 	/** The current working directory */
 	static String currentDirectory = System.getProperty("user.dir");
@@ -39,22 +38,15 @@ public class Main {
 
 		//Ask user for room quanitity and patient arrival frequency
 		System.out.println("Welcome to the Emergency Room Simulator!");
-		System.out.println("Please enter your best numerical estimate for the number of rooms filled");
+		System.out.println("Please enter your best numerical estimate for the number of rooms filled:");
 		maxRooms = sc.nextInt();
-		System.out.print("Enter period between potential patient arrivals, in minutes, e.g. 1,5,10: ");
+		System.out.println("Enter period between potential patient arrivals, in minutes, e.g. 1,5,10:");
 		period = sc.nextInt();
 		System.out.println("Thanks! The simulation will now begin.");
 
 		sc.close();
 
-		// Construct an empty ER Rooms RoomList (Linked List wrapper)
-		RoomList eRooms = new RoomList(maxRooms);
-
-		// Construct an empty Waiting Room Priority Queue
-		waitRoom = new PriorityQueue<Patient>();
-
-		// Pretend to take a little while to calculate (for improved user experience)
-		System.out.print("Begin 10h simulation:\n");
+		// Pretend to take a little while to calculate (improved user experience)
 		try {
 			for (int i = 0; i < 3; i++) {
 				Thread.sleep(600);
@@ -66,7 +58,13 @@ public class Main {
 			Thread.currentThread().interrupt();
 		}
 
-		// Main Simulation loop - Korbin Davis
+		// Construct an empty ER Rooms RoomList (Linked List wrapper)
+		RoomList eRooms = new RoomList(maxRooms);
+
+		// Construct an empty Waiting Room Priority Queue
+		waitRoom = new PriorityQueue<Patient>();
+
+		// Main Simulation loop
 		// Each iteration represents a minute
 		// 600 minutes = 10h
 		for (int i = 1; i <= 600; i++) {
@@ -99,6 +97,7 @@ public class Main {
 		int min = eRooms.getMinEverVacancy();
 		String data =
 			"Simulation report for %d rooms and %d min arrival period\n".formatted(maxRooms, period)
+			+ "Over 10 hours:\n"
 			+ formatTotals() + "\n"
 			+ formatRemaining() + "\n"
 			+ "Total Average wait time:	%.1f min\n".formatted(avgWait[0])

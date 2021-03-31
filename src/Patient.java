@@ -1,7 +1,7 @@
 /**
  * A Patient object represents a patient at the ER. They have a urgency level
- * and arrival time, as well as a unique id (currently redundant). A new patient
- * will assign itself with a random severity according to the distribution:
+ * and arrival time. A new patient will assign itself with a
+ * random severity according to the distribution:
  * <ul>
  * <li>1 – 15% minor treatment needed
  * <li>2 – 30% common treatment needed
@@ -14,7 +14,10 @@
  */
 public class Patient implements Comparable<Patient> {
 
-	/** Static count of how many Patient Instances exist. Used for unique ID */
+	/**
+	 * Static count for unique ID.
+	 * Unused in simulation, exists for testing purposes
+	 */
 	private static int count = 0;
 
 	// Instance properties
@@ -38,7 +41,8 @@ public class Patient implements Comparable<Patient> {
 	}
 
 	/**
-	 * Create a new patient with arrival time and severity. May be useful in testing
+	 * Create a new patient with arrival time and severity.
+	 * Testing compatability
 	 */
 	public Patient(int currentTime, int severity) {
 		arrivalTime = currentTime;
@@ -70,10 +74,9 @@ public class Patient implements Comparable<Patient> {
 
 	/**
 	 * Calculate a weighted sum of urgency level and arrival time.
-	 * Temporary implementation, will probably be tweaked after testing.
-	 * Currently the equation values level over arrival time.
-	 *
-	 * @return this Patients priority weight
+	 * P1 and P2 weight values chosed specifically to balance the weight around
+	 * priority and wait time
+	 * @return this Patient's priority weight
 	 */
 	private double calcWeight() {
 		final double P1 = 0.1;
