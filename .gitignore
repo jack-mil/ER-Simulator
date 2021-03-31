@@ -31,4 +31,4 @@ hs_err_pid*
 .vscode/*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,vscode
-
+ER_Rooms_Simulation_Output.txt
