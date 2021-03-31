@@ -11,7 +11,6 @@
  * Patients in a Java PriorityQueue will order themselves by urgency level and
  * arrival time. Level 4 Patiens will always get precedence before others,
  * regardless of arrival time.
- * @author Jackson Miller
  */
 public class Patient implements Comparable<Patient> {
 

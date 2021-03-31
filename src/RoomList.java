@@ -13,8 +13,6 @@ import java.util.LinkedList;
  * <li> 4: 20 min
  * </ul>
  * There is an additional 20% chance the time is extended by up to 1/2 of base time.
- *
- * @author Jackson Miller
 */
 public class RoomList {
 

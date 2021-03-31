@@ -125,7 +125,6 @@ public class Main {
 	 * see README
 	 * After calling this method, waitRoom queue contains the new patients
 	 * @param i current time / simulation step
-	 * @author Korbin Davis
 	 */
 	private static void rollForPatients(int i) {
 		// Instantiate the patient objects directly into the queue
@@ -146,6 +145,7 @@ public class Main {
 		}
 	}
 
+	/** Helper method to spawn patients */
 	private static Patient createPatient(int i) {
 		Patient p = new Patient(i);
 		// Increment total patient count
