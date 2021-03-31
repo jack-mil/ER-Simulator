@@ -1,6 +1,9 @@
 # COSC2203 Data Structures Project #
-![Artwork by Nessie](Docs/artwork-small.jpg) <!-- .element height="20%" width="20%" -->
 A simulation of hospital rooms in use over a 10h time period
+<img src="Docs/artwork.jpg" width="640"><br>
+*Nessie Richmond, Jackson Miller, Korbin Davis*
+
+------------------------------------------
 #### [Work time log](Docs/TimeLog.md) ####
 ------------------------------------------
 #### [Code Style Guide](Docs/Style.md) ####
@@ -40,7 +43,7 @@ The room is in use based on urgency distribution
 
 If all rooms are full, even rating 4 must wait
 
-[See Example Output](Example-Output.txt)
+[See *Example Output*](Example-Output.txt)
 ## Classes: ##
 
 ### `Patient` ###
