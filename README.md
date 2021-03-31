@@ -1,10 +1,12 @@
-# Group project #
+# COSC2203 Data Structures Project #
+![Artwork by Nessie](Docs/artwork-small.jpg) <!-- .element height="20%" width="20%" -->
 A simulation of hospital rooms in use over a 10h time period
-#### [Work timelog](Docs/TimeLog.md) ####
+#### [Work time log](Docs/TimeLog.md) ####
 ------------------------------------------
 #### [Code Style Guide](Docs/Style.md) ####
 ------------------------------------------
 #### Overview ####
+##### :warning: Java Version 15 or up required #####
 User picks an estimate of number of rooms needed. Analysis states whether that amount was sufficient.
 Data includes:
 - Number of rooms used/unused
@@ -38,7 +40,8 @@ The room is in use based on urgency distribution
 
 If all rooms are full, even rating 4 must wait
 
-# Classes: #
+[See Example Output](Example-Output.txt)
+## Classes: ##
 
 ### `Patient` ###
 - see [Patient Docs](Docs/Patient.md)

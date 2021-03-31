@@ -1,0 +1,29 @@
+Simulation report for 15 rooms and 5 min arrival period
+Over 10 hours:
+Total patients arrived: 212
+Total patients treated: 178
+Urgency		%total
+  1.		10.8%
+  2.		34.4%
+  3.		43.4%
+  4.		11.3%
+Urgency		%treated
+  1.		69.6%
+  2.		82.2%
+  3.		84.8%
+  4.		100.0%
+
+Patients left in waiting room:	34
+Urgency		Count
+  1.		7
+  2.		13
+  3.		14
+  4.		0
+
+Total Average wait time:	29.0 min
+Average wait time for level 1:	36.9 min
+Average wait time for level 2:	38.0 min
+Average wait time for level 3:	28.7 min
+Average wait time for level 4:	2.5 min
+Max room occupancy:	15/15
+Unused Rooms:	0/15
