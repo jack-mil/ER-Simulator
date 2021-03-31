@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author Korbin Davis, Jackson Miller, Nessie Richmond
  */
 public class Main {
-	
+
 	/** Maximum allowable rooms */
 	static int maxRooms;
 
@@ -26,7 +26,7 @@ public class Main {
 
 	/** The queue of arriving patients */
 	static Queue<Patient> waitRoom;
-	
+
 	/** The current working directory */
 	static String currentDirectory = System.getProperty("user.dir");
 
@@ -37,7 +37,7 @@ public class Main {
 
 		// Scanner object for user input
 		Scanner sc = new Scanner(System.in);
-	
+
 		//Ask user for room quanitity and patient arrival frequency
 		System.out.println("Welcome to the Emergency Room Simulator!");
 		System.out.println("Please enter your best numerical estimate for the number of rooms filled");
@@ -54,24 +54,19 @@ public class Main {
 		// Construct an empty Waiting Room Priority Queue
 		waitRoom = new PriorityQueue<Patient>();
 
-		//pretend to take a little while to calculate (for improved user experience)
+		// Pretend to take a little while to calculate (for improved user experience)
 		System.out.print("Begin 10h simulation:\n");
 		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			System.out.print("Still loading (press any key)...");
-			e.printStackTrace();
-		}
-		for (int i = 0; i < 3; i++) {
-			System.out.print(".");
-			try {
-				Thread.sleep(1100);
-			} catch (InterruptedException e) {
-				System.out.print("Still loading (press any key)...");
-				e.printStackTrace();
+			for (int i = 0; i < 3; i++) {
+				Thread.sleep(600);
+				System.out.print(".");
 			}
+			System.out.print("\n");
+			Thread.sleep(600);	
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 		}
-		
+
 		// Main Simulation loop - Korbin Davis
 		// Each iteration represents a minute
 		// 600 minutes = 10h
@@ -104,19 +99,22 @@ public class Main {
 		int max = eRooms.getMaxEverOccupancy();
 		int min = eRooms.getMinEverVacancy();
 		String data =
-			formatTotals()
-			+ formatRemaining()
-			+ "Average wait time:	%.1f min\n".formatted(avgWait[0]) + "\n"
-			+ "Average wait time for level 1:	%.1f min\n".formatted(avgWait[1]) + "\n"
-			+ "Average wait time for level 2:	%.1f min\n".formatted(avgWait[2]) + "\n"
-			+ "Average wait time for level 3:	%.1f min\n".formatted(avgWait[3]) + "\n"
-			+ "Average wait time for level 4:	%.1f min\n".formatted(avgWait[4]) + "\n"
+			"Simulation report for %d rooms and %d min arrival period\n".formatted(maxRooms, period)
+			+ formatTotals() + "\n"
+			+ formatRemaining() + "\n"
+			+ "Total Average wait time:	%.1f min\n".formatted(avgWait[0])
+			+ "Average wait time for level 1:	%.1f min\n".formatted(avgWait[1])
+			+ "Average wait time for level 2:	%.1f min\n".formatted(avgWait[2])
+			+ "Average wait time for level 3:	%.1f min\n".formatted(avgWait[3])
+			+ "Average wait time for level 4:	%.1f min\n".formatted(avgWait[4])
 			+ "Max room occupancy:	%d/%d\n".formatted(max, maxRooms)
 			+ "Unused Rooms:	%d/%d\n".formatted(min, maxRooms);
 
 		FileOutputStream out = new FileOutputStream("ER_Rooms_Simulation_Output.txt");
 		out.write(data.getBytes());
 		out.close();
+
+		System.out.println(data);
 
 		System.out.print("\nThe output file is: " + currentDirectory + "\\ER_Rooms_Simulation_Output.txt"
 				+ "\n" +"Have a great day!!!");
@@ -164,7 +162,7 @@ public class Main {
 			lvs[p.getLevel() - 1]++;
 		}
 		String msg =
-		"Patients left in wating room:	%d\n".formatted(waitRoom.size())
+		"Patients left in waiting room:	%d\n".formatted(waitRoom.size())
 		+ "Urgency		Count\n"
 		+ ("1.		%d\n"
 		+ "2.		%d\n"
