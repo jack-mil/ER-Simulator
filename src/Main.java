@@ -1,3 +1,4 @@
+
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import java.lang.Math;
  * @author Korbin Davis, Jackson Miller, Nessie Richmond
  */
 public class Main {
-
+	
 	/** Maximum allowable rooms */
 	static int maxRooms;
 
@@ -26,15 +27,19 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		//variables for user input
+		int period = 0;
+
 		// Scanner object for user input
 		Scanner sc = new Scanner(System.in);
-
-		// Get simulation parameters
-		System.out.print("Enter number of emergency rooms: ");
+	
+		//Ask user for room quanitity and patient arrival frequency
+		System.out.println("Welcome to the Emergency Room Simulator!");
+		System.out.println("Please enter your best numerical estimate for the number of rooms filled");
 		maxRooms = sc.nextInt();
-
-		System.out.print("Enter period between patient arrivals in minutes e.g. 1,5,10: ");
-		int period = sc.nextInt();
+		System.out.print("Enter period between potential patient arrivals, in minutes, e.g. 1,5,10: ");
+		period = sc.nextInt();
+		System.out.println("Thanks! The simulation will now begin.");
 
 		sc.close();
 
@@ -44,8 +49,36 @@ public class Main {
 		// Construct an empty Waiting Room Priority Queue
 		waitRoom = new PriorityQueue<Patient>();
 
-		System.out.println("Begin 10h simulation:\n...");
-
+		//pretend to take a little while to calculate (for improved user experience)
+		System.out.print("Begin 10h simulation:\n");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			System.out.print("Still loading (press any key)...");
+			e.printStackTrace();
+		}
+		System.out.print(".");
+		try {
+			Thread.sleep(1100);
+		} catch (InterruptedException e) {
+			System.out.print("Still loading (press any key)...");
+			e.printStackTrace();
+		}
+		System.out.print(".");
+		try {
+			Thread.sleep(1100);
+		} catch (InterruptedException e) {
+			System.out.print("Still loading (press any key)...");
+			e.printStackTrace();
+		}
+		System.out.println(".");
+		try {
+			Thread.sleep(1100);
+		} catch (InterruptedException e) {
+			System.out.print("Still loading (press any key)...");
+			e.printStackTrace();
+		}
+		
 		// Main Simulation loop - Korbin Davis
 		// Each iteration represents a minute
 		// 600 minutes = 10h
