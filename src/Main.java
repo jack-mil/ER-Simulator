@@ -62,26 +62,14 @@ public class Main {
 			System.out.print("Still loading (press any key)...");
 			e.printStackTrace();
 		}
-		System.out.print(".");
-		try {
-			Thread.sleep(1100);
-		} catch (InterruptedException e) {
-			System.out.print("Still loading (press any key)...");
-			e.printStackTrace();
-		}
-		System.out.print(".");
-		try {
-			Thread.sleep(1100);
-		} catch (InterruptedException e) {
-			System.out.print("Still loading (press any key)...");
-			e.printStackTrace();
-		}
-		System.out.println(".");
-		try {
-			Thread.sleep(1100);
-		} catch (InterruptedException e) {
-			System.out.print("Still loading (press any key)...");
-			e.printStackTrace();
+		for (int i = 0; i < 3; i++) {
+			System.out.print(".");
+			try {
+				Thread.sleep(1100);
+			} catch (InterruptedException e) {
+				System.out.print("Still loading (press any key)...");
+				e.printStackTrace();
+			}
 		}
 		
 		// Main Simulation loop - Korbin Davis

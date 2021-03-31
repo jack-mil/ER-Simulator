@@ -77,13 +77,13 @@ public class Patient implements Comparable<Patient> {
 	 * @return this Patients priority weight
 	 */
 	private double calcWeight() {
-		final double P1 = 0.6;
-		final double P2 = 0.4;
+		final double P1 = 0.1;
+		final double P2 = 1000;
 		// Ensure level 4 patients have automatic priority
 		if (level == 4) {
 			return Integer.MAX_VALUE;
 		} else {
-			return (P1 * level / 4) + (P2 * 1 / arrivalTime);
+			return (P1 * level / 4) + (P2 / arrivalTime);
 		}
 	}
 
