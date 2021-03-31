@@ -46,40 +46,37 @@ public class RoomList {
 			return false;
 		} else {
 			roomsLL.add(new Room(p, currentTime));
+			// update largest size
+			if (roomsLL.size() >= maxEverOccupied)
+				maxEverOccupied = roomsLL.size();
+
 			return true;
 		}
 	}
 
-	/**
-	 * Everytime this method is called, empty rooms will become
-	 * available if enough time has passed
-	 * @return number of room openings
-	 */
-	public int tick(int currentTime) {
-		// Use an iterator to loop through the linked list and remove Rooms that are old
-		// This can all be accomplished in linear time because of the LinkedList implementation
-		Iterator<Room> itr = roomsLL.iterator();
+/**
+ * Every time this method is called, empty rooms will become
+ * available if enough time has passed
+ * @return number of room openings
+ */
+public int tick(int currentTime) {
+	// Use an iterator to loop through the linked list and remove Rooms that are old
+	// This can all be accomplished in linear time because of the LinkedList implementation
+	Iterator<Room> itr = roomsLL.iterator();
 
-		int count = 0;
-		while (itr.hasNext()) {
-			Room r = itr.next();
-			// Check if the room has been occupied long enough
-			if (currentTime - r.timeIn >= r.occupiedTime) {
-				// Remove the last room returned by next() from the linked list.
-				// This should occur in O(1) time.
-				itr.remove();
-				count++;
-			}
+	int count = 0;
+	while (itr.hasNext()) {
+		Room r = itr.next();
+		// Check if the room has been occupied long enough
+		if (currentTime - r.timeIn >= r.occupiedTime) {
+			// Remove the last room returned by next() from the linked list.
+			// This should occur in O(1) time.
+			itr.remove();
+			count++;
 		}
-
-		updateMaxSize();
-		return count;
 	}
-
-	private void updateMaxSize() {
-		if (roomsLL.size() >= maxEverOccupied)
-			maxEverOccupied = roomsLL.size();
-	}
+	return count;
+}
 
 	/** @return number of rooms currently occupied */
 	public int getOccupiedRooms() {
@@ -93,7 +90,6 @@ public class RoomList {
 
 	/** @return greatest number of rooms ever occupied at one time */
 	public int getMaxEverOccupancy() {
-		updateMaxSize();
 		return maxEverOccupied;
 	}
 

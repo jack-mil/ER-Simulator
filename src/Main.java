@@ -17,7 +17,7 @@ public class Main {
 	static int maxRooms;
 
 	/** Total patient counts */
-	static int arrivalCount;
+	static int[] arrivalCount = new int[5];
 	static int[] admittedCount = new int[5];
 
 	/** Cumulative Moving Average of Waiting Time */
@@ -82,21 +82,22 @@ public class Main {
 		// Print out simulation statistics
 		int max = eRooms.getMaxEverOccupancy();
 		int min = eRooms.getMinEverVacancy();
-		String data = "Total patients arrived:	%d\n".formatted(arrivalCount)
-				+ "Total patients treated:	%d\n".formatted(admittedCount[0])
-				+ "Patients left in wating room:	%d\n".formatted(waitRoom.size()) + formatRemainingPatients().indent(2)
-				+ "Average wait time:	%.1f min\n".formatted(avgWait[0]) + "\n"
-				+ "Average wait time for level 1:	%.1f min\n".formatted(avgWait[1]) + "\n"
-				+ "Average wait time for level 2:	%.1f min\n".formatted(avgWait[2]) + "\n"
-				+ "Average wait time for level 3:	%.1f min\n".formatted(avgWait[3]) + "\n"
-				+ "Average wait time for level 4:	%.1f min\n".formatted(avgWait[4]) + "\n"
-				+ "Max room occupancy:	%d/%d\n".formatted(max, maxRooms) + "Unused Rooms:	%d/%d\n".formatted(min, maxRooms);
-		
+		String data =
+			formatTotals()
+			+ formatRemaining()
+			+ "Average wait time:	%.1f min\n".formatted(avgWait[0]) + "\n"
+			+ "Average wait time for level 1:	%.1f min\n".formatted(avgWait[1]) + "\n"
+			+ "Average wait time for level 2:	%.1f min\n".formatted(avgWait[2]) + "\n"
+			+ "Average wait time for level 3:	%.1f min\n".formatted(avgWait[3]) + "\n"
+			+ "Average wait time for level 4:	%.1f min\n".formatted(avgWait[4]) + "\n"
+			+ "Max room occupancy:	%d/%d\n".formatted(max, maxRooms)
+			+ "Unused Rooms:	%d/%d\n".formatted(min, maxRooms);
+
 		FileOutputStream out = new FileOutputStream("ER_Rooms_Simulation_Output.txt");
 		out.write(data.getBytes());
 		out.close();
 
-		System.out.print("\nThe output file is: " + currentDirectory + "\\ER_Rooms_Simulation_Output.txt" 
+		System.out.print("\nThe output file is: " + currentDirectory + "\\ER_Rooms_Simulation_Output.txt"
 				+ "\n" +"Have a great day!!!");
 	}
 
@@ -114,33 +115,57 @@ public class Main {
 		if (arrival1 <= 9) { // No new patients (10%)
 			return;
 		} else if (arrival1 <= 59) { // 1 new patient (50%)
-			waitRoom.add(new Patient(i));
-			arrivalCount++;
+			waitRoom.add(createPatient(i));
 		} else if (arrival1 <= 98) { // 2-4 new patients (39%)
 			for (int j = 0; j < ((arrival2 % 3) + 2); j++) {
-				waitRoom.add(new Patient(i));
-				arrivalCount++;
+				waitRoom.add(createPatient(i));
 			}
 		} else { // 10-15 new patients (1%)
 			for (int j = 0; j < ((arrival2 % 6) + 10); j++) {
-				waitRoom.add(new Patient(i));
-				arrivalCount++;
+				waitRoom.add(createPatient(i));
 			}
 		}
 	}
 
-	/** Simply return a formatted string of patients left in the queue */
-	public static String formatRemainingPatients() {
+	private static Patient createPatient(int i) {
+		Patient p = new Patient(i);
+		// Increment total patient count
+		arrivalCount[0]++;
+		// Increment count for this patient level
+		arrivalCount[p.getLevel()]++;
+		return p;
+	}
+
+	/** Return formatted string of patients left in the queue */
+	private static String formatRemaining() {
 		int[] lvs = new int[4];
 		for (Patient p : waitRoom) {
 			lvs[p.getLevel() - 1]++;
 		}
 		String msg =
-		"Urgency	Count\n"
-		+ "1		%d\n"
-		+ "2		%d\n"
-		+ "3		%d\n"
-		+ "4		%d\n";
+		"Patients left in wating room:	%d\n".formatted(waitRoom.size())
+		+ "Urgency		Count\n"
+		+ ("1.		%d\n"
+		+ "2.		%d\n"
+		+ "3.		%d\n"
+		+ "4.		%d\n").indent(2);
 		return msg.formatted(lvs[0], lvs[1], lvs[2], lvs[3]);
+	}
+
+	/** Return formatted string on patient totals */
+	private static String formatTotals() {
+		String msg = "Total patients arrived: %d\n".formatted(arrivalCount[0])
+		+ "Total patients treated: %d\n".formatted(admittedCount[0])
+		+ "Urgency		%total\n"
+		+ ("1.		%.1f%%\n".formatted(arrivalCount[1] / (double)arrivalCount[0] * 100)
+		+ "2.		%.1f%%\n".formatted(arrivalCount[2] / (double)arrivalCount[0] * 100)
+		+ "3.		%.1f%%\n".formatted(arrivalCount[3] / (double)arrivalCount[0] * 100)
+		+ "4.		%.1f%%\n".formatted(arrivalCount[4] / (double)arrivalCount[0] * 100)).indent(2)
+		+ "Urgency		%treated\n"
+		+ ("1.		%.1f%%\n".formatted(admittedCount[1] / (double)arrivalCount[1] * 100)
+		+ "2.		%.1f%%\n".formatted(admittedCount[2] / (double)arrivalCount[2] * 100)
+		+ "3.		%.1f%%\n".formatted(admittedCount[3] / (double)arrivalCount[3] * 100)
+		+ "4.		%.1f%%\n".formatted(admittedCount[4] / (double)arrivalCount[4] * 100)).indent(2);
+		return msg;
 	}
 }
