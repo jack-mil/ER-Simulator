@@ -1,0 +1,20 @@
+Total patients arrived:	216
+Total patients treated:	216
+Patients left in wating room:	0
+  Urgency	Count
+  1		0
+  2		0
+  3		0
+  4		0
+Average wait time:	0.6 min
+
+Average wait time for level 1:	1.1 min
+
+Average wait time for level 2:	0.7 min
+
+Average wait time for level 3:	0.5 min
+
+Average wait time for level 4:	0.0 min
+
+Max room occupancy:	30/30
+Unused Rooms:	0/30

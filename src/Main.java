@@ -2,6 +2,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 import java.lang.Math;
+import java.io.FileOutputStream;
+import java.io.IOException;
 /**
  * Main simulation class
  * Run a 10h simulation of emergency room patient logistics.
@@ -23,8 +25,11 @@ public class Main {
 
 	/** The queue of arriving patients */
 	static Queue<Patient> waitRoom;
+	
+	/** The current working directory */
+	static String currentDirectory = System.getProperty("user.dir");
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		// Scanner object for user input
 		Scanner sc = new Scanner(System.in);
@@ -77,7 +82,7 @@ public class Main {
 		// Print out simulation statistics
 		int max = eRooms.getMaxEverOccupancy();
 		int min = eRooms.getMinEverVacancy();
-		System.out.print("Total patients arrived:	%d\n".formatted(arrivalCount)
+		String data = "Total patients arrived:	%d\n".formatted(arrivalCount)
 				+ "Total patients treated:	%d\n".formatted(admittedCount[0])
 				+ "Patients left in wating room:	%d\n".formatted(waitRoom.size()) + formatRemainingPatients().indent(2)
 				+ "Average wait time:	%.1f min\n".formatted(avgWait[0]) + "\n"
@@ -85,10 +90,14 @@ public class Main {
 				+ "Average wait time for level 2:	%.1f min\n".formatted(avgWait[2]) + "\n"
 				+ "Average wait time for level 3:	%.1f min\n".formatted(avgWait[3]) + "\n"
 				+ "Average wait time for level 4:	%.1f min\n".formatted(avgWait[4]) + "\n"
-				+ "Max room occupancy:	%d/%d\n".formatted(max, maxRooms) + "Unused Rooms:	%d/%d\n".formatted(min, maxRooms));
+				+ "Max room occupancy:	%d/%d\n".formatted(max, maxRooms) + "Unused Rooms:	%d/%d\n".formatted(min, maxRooms);
+		
+		FileOutputStream out = new FileOutputStream("ER_Rooms_Simulation_Output.txt");
+		out.write(data.getBytes());
+		out.close();
 
-		// @TODO Create the Analytics and outputs (Send to a DOC) - Korbin Davis and Nessie Richmond
-
+		System.out.print("\nThe output file is: " + currentDirectory + "\\ER_Rooms_Simulation_Output.txt" 
+				+ "\n" +"Have a great day!!!");
 	}
 
 	/**
